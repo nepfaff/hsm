@@ -1,0 +1,48 @@
+# HSM (Hierarchical Scene Motifs) Requirements
+# Python 3.10 or 3.11 required
+
+# Core dependencies - versions matching environment.yml
+numpy<2
+matplotlib
+pyyaml
+omegaconf
+natsort
+tqdm
+regex
+scipy
+pillow
+
+# 3D Graphics & Visualization
+pyrender
+trimesh[all]>=4.4,<5
+
+# Geometric operations
+rtree
+shapely
+
+# Deep Learning & Vision
+# Note: Install PyTorch separately based on your system (see INSTALL_PIP.md)
+# For CUDA 12.1: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+# For CPU only: pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+# torch (installed separately)
+# torchvision (installed separately)
+open-clip-torch
+
+# API Integration
+openai
+python-dotenv
+
+# Hugging Face integration
+huggingface-hub
+
+# Collision detection and geometry processing
+python-fcl
+manifold3d
+embreex
+earcut
+
+# Utilities
+compress_json
+
+# Git-based dependencies (install separately)
+# git+https://github.com/openai/CLIP.git

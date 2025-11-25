@@ -445,10 +445,18 @@ def apply_cutout_from_object(
             logger.error(f"Cutout_box for {cutout.cutout_type} could not be repaired. Skipping cutout.")
             return current_wall_box
 
-    new_wall = trimesh.boolean.difference(
-        [current_wall_box, cutout_box],
-        engine="manifold"
-    )
+    # Try manifold engine first, fall back to default if unavailable
+    try:
+        new_wall = trimesh.boolean.difference(
+            [current_wall_box, cutout_box],
+            engine="manifold"
+        )
+    except KeyError:
+        logger.warning(f"Manifold engine not available for {cutout.cutout_type} cutout, using default engine")
+        new_wall = trimesh.boolean.difference(
+            [current_wall_box, cutout_box]
+        )
+
     if new_wall is None:
         logger.error(f"All boolean engines failed for {cutout.cutout_type} cutout - returning original wall")
         return current_wall_box
