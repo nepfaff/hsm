@@ -173,6 +173,40 @@ By default, `stk_scene_state.json` will be generated in the output folder and ca
 
 For more details, please refer to the [official SceneEval repo](https://github.com/3dlg-hcvc/SceneEval).
 
+### Batch Generation for SceneEval
+
+To generate multiple scenes from the SceneEval-500 benchmark dataset, use the batch script:
+
+```bash
+# Activate environment
+source .venv/bin/activate  # or: conda activate hsm
+
+# Generate scenes 0-4 (first 5 scenes)
+python scripts/batch_sceneeval.py --start 0 --end 5
+
+# Generate specific scene IDs
+python scripts/batch_sceneeval.py --ids 0,1,2,3,4
+
+# Skip scenes that already have outputs
+python scripts/batch_sceneeval.py --start 0 --end 100 --skip-existing
+```
+
+**Arguments:**
+- `--csv <path>`: Path to SceneEval annotations CSV (default: `~/SceneEval/input/annotations.csv`)
+- `--output-dir <path>`: Output directory for scene JSONs (default: `~/SceneEval/input/HSM`)
+- `--start <id>`: Start scene ID, inclusive (default: 0)
+- `--end <id>`: End scene ID, exclusive (default: 5)
+- `--ids <list>`: Comma-separated scene IDs (overrides --start/--end)
+- `--skip-existing`: Skip scenes that already have output files
+
+**Output:** Scene state JSON files compatible with SceneEval at `~/SceneEval/input/HSM/scene_{ID}.json`
+
+After generation, evaluate using SceneEval:
+```bash
+cd ~/SceneEval
+python main.py  # with HSM configured in configs/models.yaml
+```
+
 
 ## Adding New Motif Types
 
