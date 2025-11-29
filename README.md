@@ -207,6 +207,26 @@ cd ~/SceneEval
 python main.py  # with HSM configured in configs/models.yaml
 ```
 
+### Batch Generation with Custom Prompts
+
+To generate scenes from your own list of prompts, create a CSV file with the following format:
+
+```csv
+ID,Description,Difficulty
+0,"A kid's bedroom with a pastel pink twin bed against the back wall.",medium
+1,"A Japanese-style living room featuring a coffee table next to the window.",medium
+```
+
+Then run the batch script with your custom CSV:
+
+```bash
+conda activate hsm
+python scripts/batch_sceneeval.py \
+    --csv prompts.csv \
+    --output-dir results/batch_output \
+    --ids 0,1
+```
+
 
 ## Adding New Motif Types
 
